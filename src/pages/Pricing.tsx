@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Topbar from '../components/Topbar';
 import { FaApple, FaCheck } from 'react-icons/fa';
-import { HiExternalLink } from 'react-icons/hi';
 import '../App.css';
 
 function Pricing() {

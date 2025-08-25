@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Topbar from '../components/Topbar';
 import { FaGoogle, FaApple } from 'react-icons/fa';
+import '../App.css';
 
 function Home() {
   const [activeTab, setActiveTab] = useState('tab1');
