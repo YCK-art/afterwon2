@@ -3,7 +3,11 @@ import Topbar from '../components/Topbar';
 import { FaApple, FaCheck } from 'react-icons/fa';
 import '../App.css';
 
-function Pricing() {
+interface PricingProps {
+  onGetStartedClick: () => void;
+}
+
+function Pricing({ onGetStartedClick }: PricingProps) {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
 
   const handleGetStartedClick = () => {
@@ -60,33 +64,33 @@ function Pricing() {
                 </ul>
               </div>
               <div className="plan-actions">
-                <button className="action-btn primary-btn">
-                  <FaApple className="btn-icon" />
-                  Download
+                <button className="action-btn primary-btn" onClick={onGetStartedClick}>
+                  Get Started
                 </button>
               </div>
             </div>
 
             {/* Pro Plan */}
-            <div className="pricing-card pro-card">
+            <div className="pricing-card">
               <h3 className="plan-name">Pro</h3>
               <div className="plan-price">
-                <span className="price-amount">{billingCycle === 'monthly' ? '$20' : '$16'}</span>
-                <span className="price-period">/mo</span>
+                <span className="price-amount">${billingCycle === 'monthly' ? '20' : '16'}</span>
+                <span className="price-period">/{billingCycle === 'monthly' ? 'month' : 'month'}</span>
               </div>
-              <hr className="plan-divider" />
+              <div className="plan-divider"></div>
               <div className="plan-features">
-                <p className="includes-text">Everything in Hobby, plus</p>
+                <p className="includes-text">Everything in Hobby, plus:</p>
                 <ul className="features-list">
-                  <li><FaCheck className="check-icon" /> Extended limits on Agent</li>
-                  <li><FaCheck className="check-icon" /> Unlimited Tab completions</li>
-                  <li><FaCheck className="check-icon" /> Access to Background Agents</li>
-                  <li><FaCheck className="check-icon" /> Access to Bugbot</li>
-                  <li><FaCheck className="check-icon" /> Access to maximum context windows</li>
+                  <li><FaCheck className="check-icon" />Advanced analytics</li>
+                  <li><FaCheck className="check-icon" />Priority support</li>
+                  <li><FaCheck className="check-icon" />Custom integrations</li>
+                  <li><FaCheck className="check-icon" />Team collaboration</li>
                 </ul>
               </div>
               <div className="plan-actions">
-                <button className="action-btn primary-btn">Get Pro</button>
+                <button className="action-btn primary-btn" onClick={onGetStartedClick}>
+                  Get Pro
+                </button>
               </div>
             </div>
 
@@ -94,19 +98,23 @@ function Pricing() {
             <div className="pricing-card">
               <h3 className="plan-name">Ultra</h3>
               <div className="plan-price">
-                <span className="price-amount">{billingCycle === 'monthly' ? '$200' : '$160'}</span>
-                <span className="price-period">/mo</span>
+                <span className="price-amount">${billingCycle === 'monthly' ? '49' : '39'}</span>
+                <span className="price-period">/{billingCycle === 'monthly' ? 'month' : 'month'}</span>
               </div>
-              <hr className="plan-divider" />
+              <div className="plan-divider"></div>
               <div className="plan-features">
-                <p className="includes-text">Everything in Pro, plus</p>
+                <p className="includes-text">Everything in Pro, plus:</p>
                 <ul className="features-list">
-                  <li><FaCheck className="check-icon" /> 20x usage on all OpenAI, Claude, Gemini models</li>
-                  <li><FaCheck className="check-icon" /> Priority access to new features</li>
+                  <li><FaCheck className="check-icon" />Enterprise features</li>
+                  <li><FaCheck className="check-icon" />Dedicated support</li>
+                  <li><FaCheck className="check-icon" />Custom solutions</li>
+                  <li><FaCheck className="check-icon" />Advanced security</li>
                 </ul>
               </div>
               <div className="plan-actions">
-                <button className="action-btn primary-btn">Get Ultra</button>
+                <button className="action-btn primary-btn" onClick={onGetStartedClick}>
+                  Get Ultra
+                </button>
               </div>
             </div>
           </div>
