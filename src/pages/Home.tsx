@@ -1,27 +1,15 @@
 import { useState } from 'react';
-import Topbar from '../components/Topbar';
-import { FaGoogle, FaApple } from 'react-icons/fa';
 import '../App.css';
 
 function Home() {
   const [activeTab, setActiveTab] = useState('tab1');
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
   };
 
-  const handleGetStartedClick = () => {
-    setShowLoginModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowLoginModal(false);
-  };
-
   return (
     <>
-      <Topbar onGetStartedClick={handleGetStartedClick} />
       <main className="main-content">
         <div className="content-wrapper">
           <div className="hero-section">
@@ -101,7 +89,7 @@ function Home() {
       </section>
       
       {/* 로그인 모달 */}
-      {showLoginModal && (
+      {/* showLoginModal && (
         <div className="login-modal-overlay" onClick={handleCloseModal}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={handleCloseModal}>
@@ -148,7 +136,7 @@ function Home() {
             </div>
           </div>
         </div>
-      )}
+      ) */}
     </>
   );
 }

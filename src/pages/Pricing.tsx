@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import Topbar from '../components/Topbar';
-import { FaApple, FaCheck } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 import '../App.css';
 
 interface PricingProps {
@@ -10,16 +9,9 @@ interface PricingProps {
 function Pricing({ onGetStartedClick }: PricingProps) {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
 
-  const handleGetStartedClick = () => {
-    // 로그인 모달을 여는 로직 (필요시 구현)
-    console.log('Get Started clicked');
-  };
-
   return (
-    <div className="App">
-      <Topbar onGetStartedClick={handleGetStartedClick} />
-      <main className="pricing-content">
-        <div className="pricing-container">
+    <main className="pricing-content">
+      <div className="pricing-container">
           {/* Header Section */}
           <div className="pricing-header">
             <div className="pricing-title-section">
@@ -120,7 +112,6 @@ function Pricing({ onGetStartedClick }: PricingProps) {
           </div>
         </div>
       </main>
-    </div>
   );
 }
 
