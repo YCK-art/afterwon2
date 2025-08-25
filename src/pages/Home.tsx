@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { MdInsights, MdPalette, MdTrendingUp } from 'react-icons/md';
 import '../App.css';
 
 function Home() {
@@ -48,18 +49,21 @@ function Home() {
                     className={`segment-btn ${activeTab === 'tab1' ? 'active' : ''}`}
                     onClick={() => handleTabClick('tab1')}
                   >
+                    <MdInsights className="segment-icon" />
                     Instant Insights
                   </button>
                   <button 
                     className={`segment-btn ${activeTab === 'tab2' ? 'active' : ''}`}
                     onClick={() => handleTabClick('tab2')}
                   >
+                    <MdPalette className="segment-icon" />
                     Beautiful UI
                   </button>
                   <button 
                     className={`segment-btn ${activeTab === 'tab3' ? 'active' : ''}`}
                     onClick={() => handleTabClick('tab3')}
                   >
+                    <MdTrendingUp className="segment-icon" />
                     Smarter over time
                   </button>
                 </div>

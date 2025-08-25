@@ -40,19 +40,20 @@ function Pricing({ onGetStartedClick }: PricingProps) {
 
           {/* Pricing Cards */}
           <div className="pricing-cards">
-            {/* Hobby Plan */}
+            {/* Free Plan */}
             <div className="pricing-card">
-              <h3 className="plan-name">Hobby</h3>
+              <h3 className="plan-name">Free</h3>
               <div className="plan-price">
-                {billingCycle === 'monthly' ? 'Free' : 'Free'}
+                {billingCycle === 'monthly' ? '$0' : '$0'}
               </div>
               <hr className="plan-divider" />
               <div className="plan-features">
                 <p className="includes-text">Includes</p>
                 <ul className="features-list">
-                  <li><FaCheck className="check-icon" /> Pro two-week trial</li>
-                  <li><FaCheck className="check-icon" /> Limited Agent requests</li>
-                  <li><FaCheck className="check-icon" /> Limited Tab completions</li>
+                  <li><FaCheck className="check-icon" /> 20 messages / month</li>
+                  <li><FaCheck className="check-icon" /> Up to 5MB per file</li>
+                  <li><FaCheck className="check-icon" /> Basic AI insights</li>
+                  <li><FaCheck className="check-icon" /> Standard chart templates</li>
                 </ul>
               </div>
               <div className="plan-actions">
@@ -71,12 +72,12 @@ function Pricing({ onGetStartedClick }: PricingProps) {
               </div>
               <div className="plan-divider"></div>
               <div className="plan-features">
-                <p className="includes-text">Everything in Hobby, plus:</p>
+                <p className="includes-text">Everything in Free, plus:</p>
                 <ul className="features-list">
-                  <li><FaCheck className="check-icon" />Advanced analytics</li>
-                  <li><FaCheck className="check-icon" />Priority support</li>
-                  <li><FaCheck className="check-icon" />Custom integrations</li>
-                  <li><FaCheck className="check-icon" />Team collaboration</li>
+                  <li><FaCheck className="check-icon" /> 300 messages / month</li>
+                  <li><FaCheck className="check-icon" /> Saved prompts & dashboards</li>
+                  <li><FaCheck className="check-icon" /> Faster processing speed</li>
+                  <li><FaCheck className="check-icon" /> Advanced chart options</li>
                 </ul>
               </div>
               <div className="plan-actions">
@@ -97,10 +98,11 @@ function Pricing({ onGetStartedClick }: PricingProps) {
               <div className="plan-features">
                 <p className="includes-text">Everything in Pro, plus:</p>
                 <ul className="features-list">
-                  <li><FaCheck className="check-icon" />Enterprise features</li>
-                  <li><FaCheck className="check-icon" />Dedicated support</li>
-                  <li><FaCheck className="check-icon" />Custom solutions</li>
-                  <li><FaCheck className="check-icon" />Advanced security</li>
+                  <li><FaCheck className="check-icon" /> Unlimited messages</li>
+                  <li><FaCheck className="check-icon" /> Team workspaces & collaboration</li>
+                  <li><FaCheck className="check-icon" /> 30-day file storage & version history</li>
+                  <li><FaCheck className="check-icon" /> User roles & permissions</li>
+                  <li><FaCheck className="check-icon" /> Priority support</li>
                 </ul>
               </div>
               <div className="plan-actions">

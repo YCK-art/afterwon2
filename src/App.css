@@ -292,6 +292,19 @@
   display: none;
 }
 
+/* 세그먼트 아이콘 스타일 */
+.segment-icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+.segment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .feature-card h3 {
   font-size: 1.4rem;
   color: #000000;
@@ -663,6 +676,12 @@ body {
 .pricing-card:hover {
   box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
 }
+
+
+
+
+
+
 
 .plan-name {
   font-size: 1.5rem;
