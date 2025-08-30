@@ -28,9 +28,12 @@ async function withBackoff<T>(fn: () => Promise<T>, max = 4) {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // API 키 디버깅
   console.log('🔑 Environment variables check:');
+  console.log('All env vars:', Object.keys(process.env));
   console.log('OPENAI_API_KEY exists:', !!process.env.OPENAI_API_KEY);
   console.log('OPENAI_API_KEY length:', process.env.OPENAI_API_KEY?.length);
   console.log('OPENAI_API_KEY preview:', process.env.OPENAI_API_KEY?.substring(0, 20) + '...');
+  console.log('NODE_ENV:', process.env.NODE_ENV);
+  console.log('VERCEL_ENV:', process.env.VERCEL_ENV);
   
   // CORS 설정
   res.setHeader('Access-Control-Allow-Origin', '*');
