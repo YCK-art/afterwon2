@@ -1,12 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import Topbar from './components/Topbar';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
+import Dashboard from './pages/Dashboard';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
 
-function App() {
+function AppContent() {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const { currentUser, signInWithGoogle, logout } = useAuth();
 
   const onGetStartedClick = () => {
     setShowLoginModal(true);
@@ -16,13 +19,46 @@ function App() {
     setShowLoginModal(false);
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      setShowLoginModal(false);
+      // 로그인 성공 후 대시보드로 이동
+      window.location.href = '/dashboard';
+    } catch (error) {
+      console.error('Google 로그인 실패:', error);
+      alert('Google 로그인에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
+  };
+
   return (
     <Router>
       <div className="App">
-        <Topbar onGetStartedClick={onGetStartedClick} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pricing" element={<Pricing onGetStartedClick={onGetStartedClick} />} />
+          <Route path="/" element={
+            <>
+              <Topbar onGetStartedClick={onGetStartedClick} />
+              <Home />
+            </>
+          } />
+          <Route path="/pricing" element={
+            <>
+              <Topbar onGetStartedClick={onGetStartedClick} />
+              <Pricing onGetStartedClick={onGetStartedClick} />
+            </>
+          } />
+          <Route 
+            path="/dashboard" 
+            element={currentUser ? <Dashboard /> : <Navigate to="/" replace />} 
+          />
         </Routes>
         
         {/* 로그인 모달 */}
@@ -43,7 +79,7 @@ function App() {
                 </p>
                 
                 <div className="login-options">
-                  <button className="login-btn google-btn">
+                  <button className="login-btn google-btn" onClick={handleGoogleLogin}>
                     <span className="btn-icon">G</span>
                     Continue with Google
                   </button>
@@ -76,6 +112,14 @@ function App() {
         )}
       </div>
     </Router>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

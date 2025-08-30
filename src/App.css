@@ -107,6 +107,7 @@
 
 .tag:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .media-container {
@@ -484,6 +485,8 @@
   background-color: #111111;
 }
 
+
+
 .sso-text {
   color: #999;
   font-size: 0.9rem;
@@ -530,7 +533,7 @@ body {
 .pricing-content {
   padding-top: 80px;
   min-height: 100vh;
-  background-color: #000000;
+  background-color: #0f0f0f;
   color: #ffffff;
 }
 

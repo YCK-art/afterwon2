@@ -1,0 +1,261 @@
+.sheet-selection-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.sheet-selection-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-content {
+  padding: 24px;
+}
+
+.file-info {
+  margin: 0 0 20px 0;
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.sheet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sheet-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.sheet-option:hover {
+  border-color: #667eea;
+  background-color: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.sheet-option:active {
+  transform: translateY(0);
+}
+
+.sheet-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.sheet-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  flex-grow: 1;
+}
+
+.modal-footer {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 16px;
+}
+
+.info-text {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.4;
+  text-align: center;
+  font-style: italic;
+}
+
+/* 채팅창 내 인라인 시트 선택 컴포넌트 스타일 */
+.chat-message .sheet-selection-inline,
+.dashboard .sheet-selection-inline {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.sheet-selection-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sheet-selection-header h4 {
+  margin: 0 0 8px 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.sheet-selection-header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.sheet-selection-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.file-sheet-selection {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.file-name {
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.sheet-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.sheet-selection-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.sheet-selection-btn:hover {
+  border-color: #667eea;
+  background-color: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sheet-selection-btn:active {
+  transform: translateY(0);
+}
+
+.sheet-selection-btn .sheet-icon {
+  font-size: 1rem;
+}
+
+.sheet-selection-btn .sheet-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 640px) {
+  .sheet-selection-modal {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .modal-header {
+    padding: 16px 20px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .sheet-option {
+    padding: 14px;
+  }
+  
+  .sheet-selection-inline {
+    padding: 16px;
+    margin: 16px 0;
+  }
+  
+  .sheet-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .sheet-selection-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+} 

@@ -1,0 +1,218 @@
+.chat-search-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.chat-search-modal {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid #333;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+}
+
+/* 헤더 */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid #333;
+  background-color: #1a1a1a; /* 명시적으로 헤더 배경색 설정 */
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a !important; /* 강제로 원래 색상 적용 */
+  border-radius: 8px;
+  padding: 12px 16px;
+  flex: 1;
+  margin-right: 16px;
+  position: relative;
+}
+
+/* ChatSearchModal 전용 스타일 강화 */
+.chat-search-modal .search-container {
+  background: #2a2a2a !important;
+}
+
+/* Kill any gradient layer applied globally */
+.chat-search-modal .modal-header {
+  background: #1a1a1a !important;      /* resets background-image too */
+  background-image: none !important;    /* belt & braces */
+}
+
+/* In case a global ::before/::after paints a gradient bar */
+.chat-search-modal .modal-header::before,
+.chat-search-modal .modal-header::after {
+  content: none !important;
+  background: none !important;
+}
+
+
+
+.search-input {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  flex: 1;
+  outline: none;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+  padding-left: 0;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* 구분선 */
+.modal-divider {
+  height: 1px;
+  background-color: #333;
+  margin: 0;
+}
+
+/* 내용 */
+.modal-content {
+  padding: 0;
+  max-height: calc(80vh - 80px);
+  overflow-y: auto;
+}
+
+
+
+/* 채팅 그룹 */
+.chat-group {
+  margin-bottom: 8px;
+}
+
+.group-header {
+  padding: 16px 28px 12px;
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+}
+
+.chat-history-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 14px 28px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  text-align: left;
+}
+
+.chat-history-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chat-icon {
+  color: #888;
+  font-size: 16px;
+  min-width: 18px;
+}
+
+.chat-title {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 검색 결과 없음 */
+.no-results {
+  padding: 50px 28px;
+  text-align: center;
+  color: #888;
+}
+
+.no-results p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* 스크롤바 스타일링 */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .chat-search-modal {
+    width: 95%;
+    max-width: 600px;
+    margin: 20px;
+  }
+  
+  .modal-header {
+    padding: 20px 24px 16px;
+  }
+  
+  .search-container {
+    margin-right: 12px;
+  }
+  
+  .new-chat-section,
+  .chat-group .group-header,
+  .chat-history-item {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+} 

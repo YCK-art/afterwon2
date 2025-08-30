@@ -1,0 +1,68 @@
+.table-demo {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.table-demo h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+}
+
+.table-demo p {
+  color: #cccccc;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+}
+
+/* 셀 스타일링 */
+.cell-id {
+  color: #00d4ff;
+  font-weight: 600;
+  font-family: 'SpaceMono-Regular', monospace;
+}
+
+.cell-name {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.cell-email {
+  color: #00d4ff;
+  font-family: 'SpaceMono-Regular', monospace;
+  font-size: 0.9em;
+}
+
+.cell-age {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+.cell-city {
+  color: #cccccc;
+}
+
+.cell-status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cell-status.active {
+  background-color: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.cell-status.inactive {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+} 

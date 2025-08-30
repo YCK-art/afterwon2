@@ -1,0 +1,601 @@
+.files-page {
+  flex: 1;
+  padding: 24px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  overflow-y: auto;
+}
+
+/* 로딩 상태 */
+.files-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top: 4px solid #00d4ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.files-loading p {
+  color: #888;
+  font-size: 16px;
+}
+
+/* 에러 상태 */
+.files-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: 20px;
+  text-align: center;
+}
+
+.files-error p {
+  color: #ff6b6b;
+  font-size: 16px;
+}
+
+.files-error button {
+  background-color: #00d4ff;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.files-error button:hover {
+  background-color: #00b8e6;
+}
+
+/* 헤더 */
+.files-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+}
+
+/* 검색 컨테이너 */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  flex: 1;
+  max-width: 400px;
+}
+
+
+
+.search-input {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  flex: 1;
+  outline: none;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+/* 액션 버튼들 */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'HelveticaNeueRegular', 'Helvetica Neue', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.action-btn:not(.disabled):hover {
+  transform: translateY(-1px);
+}
+
+.action-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.download-btn {
+  background-color: #000000;
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+}
+
+.download-btn:not(.disabled):hover {
+  background-color: #00d4ff;
+  color: #000000;
+}
+
+.delete-btn {
+  background-color: #000000;
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+}
+
+.delete-btn:not(.disabled):hover {
+  background-color: #00d4ff;
+  color: #000000;
+}
+
+.chat-btn {
+  background-color: #000000;
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+}
+
+.chat-btn:not(.disabled):hover {
+  background-color: #00d4ff;
+  color: #000000;
+}
+
+/* 파일 테이블 */
+.files-table {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  /* remove overflow here; it moves to the inner wrapper */
+  width: fit-content;
+  box-sizing: border-box;
+}
+
+/* NEW: shared scroll area for header + body */
+.files-table-scroll {
+  /* max-height 제거하여 무한 스크롤 구현 */
+  overflow-y: auto;
+  /* keeps layout stable even when scrollbar appears */
+  scrollbar-gutter: stable both-edges;
+  /* ensure the scroll container takes fit-content width */
+  width: fit-content;
+}
+
+/* make sure no child can force its column wider */
+.table-header > *, .file-row > * { 
+  min-width: 0; 
+}
+
+/* 테이블 헤더 */
+.table-header {
+  display: grid;
+  grid-template-columns: 50px 500px 120px 150px 120px;
+  gap: 16px;
+  padding: 16px;
+  background-color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  color: #ccc;
+  place-items: center;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  
+  /* ensure perfect grid alignment */
+  box-sizing: border-box;
+  
+  /* ensure the border spans the fit-content width */
+  width: fit-content;
+  margin: 0;
+}
+
+.header-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-size {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-date {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 테이블 바디 */
+.table-body {
+  /* remove max-height/overflow from here */
+  max-height: none;
+  overflow: visible;
+}
+
+/* 파일 행 */
+.file-row {
+  display: grid;
+  grid-template-columns: 50px 500px 120px 150px 120px;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #444;
+  transition: background-color 0.2s ease;
+  place-items: center;
+  
+  /* ensure perfect grid alignment */
+  box-sizing: border-box;
+  
+  /* 세로 중앙 정렬을 위한 최소 높이 설정 */
+  min-height: 60px;
+}
+
+.file-row:hover {
+  background-color: #333;
+}
+
+.file-row:last-child {
+  border-bottom: none;
+}
+
+/* 체크박스 */
+.file-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00d4ff;
+  cursor: pointer;
+  position: relative;
+  appearance: none;
+  border: 2px solid #555;
+  border-radius: 3px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.file-checkbox input[type="checkbox"]:checked {
+  background-color: #00d4ff;
+  border-color: #00d4ff;
+}
+
+.file-checkbox input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23000000' d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.file-checkbox input[type="checkbox"]:hover {
+  border-color: #00d4ff;
+}
+
+/* 헤더 체크박스도 동일하게 스타일링 */
+.header-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00d4ff;
+  cursor: pointer;
+  position: relative;
+  appearance: none;
+  border: 2px solid #555;
+  border-radius: 3px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.header-checkbox input[type="checkbox"]:checked {
+  background-color: #00d4ff;
+  border-color: #00d4ff;
+}
+
+.header-checkbox input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23000000' d='M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.header-checkbox input[type="checkbox"]:hover {
+  border-color: #00d4ff;
+}
+
+/* 파일 정보 */
+.file-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  overflow: hidden;
+  height: 100%;
+  
+  /* 세로 중앙 정렬 강화 */
+  align-self: center;
+}
+
+.file-icon {
+  font-size: 20px;
+  min-width: 20px;
+  flex-shrink: 0;
+  
+  /* 세로 중앙 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-icon.excel {
+  color: #217346;
+}
+
+.file-icon.pdf {
+  color: #ff0000;
+}
+
+.file-icon.word {
+  color: #2b579a;
+}
+
+.file-icon.text {
+  color: #00d4ff;
+}
+
+.file-icon.default {
+  color: #888;
+}
+
+.file-name {
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  
+  /* 세로 중앙 정렬 강화 */
+  align-self: center;
+  line-height: 1;
+}
+
+/* 파일 크기 */
+.file-size {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #ccc;
+  font-size: 14px;
+  white-space: nowrap;
+  
+  /* Grid 내에서 세로 중앙 정렬 강화 */
+  align-self: center;
+}
+
+/* 파일 날짜 */
+.file-date {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #ccc;
+  font-size: 14px;
+  white-space: nowrap;
+  
+  /* Grid 내에서 세로 중앙 정렬 강화 */
+  align-self: center;
+}
+
+/* 파일 액션 */
+.file-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.action-icon:hover {
+  background-color: #444;
+  color: #ffffff;
+}
+
+.chat-icon:hover {
+  color: #00d4ff;
+}
+
+.more-icon:hover {
+  color: #888;
+}
+
+/* 파일 드롭다운 메뉴 */
+.file-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  min-width: 120px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.dropdown-item:hover {
+  background-color: #3a3a3a;
+}
+
+.dropdown-item.delete {
+  color: #ff6b6b;
+}
+
+.dropdown-item.delete:hover {
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.dropdown-icon {
+  font-size: 14px;
+}
+
+/* 파일 없음 */
+.no-files {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #888;
+  font-size: 16px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .files-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .search-container {
+    max-width: none;
+  }
+  
+  .action-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .files-page {
+    padding: 16px;
+  }
+  
+  .table-header,
+  .file-row {
+    grid-template-columns: 40px 1fr 80px 100px 80px;
+    gap: 12px;
+    padding: 12px;
+  }
+  
+  .action-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .file-name {
+    font-size: 14px;
+  }
+  
+  .file-size,
+  .file-date {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header,
+  .file-row {
+    grid-template-columns: 30px 1fr 60px;
+    gap: 8px;
+    padding: 8px;
+  }
+  
+  .header-size,
+  .file-size,
+  .header-date,
+  .file-date {
+    display: none;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .action-btn {
+    justify-content: center;
+  }
+} 

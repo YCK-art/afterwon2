@@ -15,12 +15,26 @@ AI를 활용하여 데이터를 차트와 그래프로 시각화하는 웹 애�
 npm install
 ```
 
-2. 개발 서버 실행
+2. 환경 변수 설정
+프로젝트 루트에 `.env` 파일을 생성하고 다음 내용을 추가하세요:
+
+```bash
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
+VITE_OPENAI_API_KEY=your_openai_api_key
+```
+
+3. 개발 서버 실행
 ```bash
 npm run dev
 ```
 
-3. 브라우저에서 `http://localhost:3000` 접속
+4. 브라우저에서 `http://localhost:3000` 접속
 
 ### 빌드
 ```bash
@@ -65,6 +79,8 @@ afterwon/
 - **Build Tool**: Vite
 - **Styling**: CSS3
 - **Fonts**: Helvetica Neue (Heavy, Light)
+- **Backend**: Firebase (Authentication, Firestore)
+- **AI**: OpenAI GPT API
 
 ## 📱 반응형 디자인
 
