@@ -1,4 +1,4 @@
-import { doc, setDoc, updateDoc, getDoc, collection, query, orderBy, getDocs, where, writeBatch } from 'firebase/firestore';
+import { doc, setDoc, updateDoc, getDoc, collection, query, getDocs, where, writeBatch } from 'firebase/firestore';
 import { db } from '../firebase/config';
 
 export interface ChatMessage {

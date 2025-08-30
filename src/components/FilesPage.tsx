@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaEllipsisV, FaFile, FaFileExcel, FaFilePdf, FaFileWord, FaFileAlt, FaComment, FaCheck } from 'react-icons/fa';
+import { FaEllipsisV, FaFile, FaFileExcel, FaFilePdf, FaFileWord, FaFileAlt, FaComment } from 'react-icons/fa';
 import { FiDownload, FiTrash2, FiMessageCircle } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import { getUserFiles, deleteFile, FileInfo } from '../services/storageService';

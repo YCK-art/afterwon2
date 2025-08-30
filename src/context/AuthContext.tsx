@@ -97,14 +97,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         } else {
           // 프로필 이미지 제거
           console.log('AuthContext: Firestore에서 프로필 이미지 URL 제거 중...');
-          await updateUserData(currentUser.uid, { profileImageURL: null });
+          await updateUserData(currentUser.uid, { profileImageURL: undefined });
           console.log('AuthContext: Firestore 제거 완료');
         }
         
         // 로컬 상태 업데이트
         console.log('AuthContext: 로컬 상태 업데이트 시작...');
         setUserData(prev => {
-          const newData = prev ? { ...prev, profileImageURL: imageURL || undefined } : null;
+          if (!prev) return null;
+          const newData = { ...prev, profileImageURL: imageURL || undefined };
           console.log('AuthContext: 새로운 userData:', newData);
           return newData;
         });
@@ -190,7 +191,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         await setDoc(userRef, userData);
         
         // 새로 생성된 사용자 데이터를 로컬 상태에 설정
-        setUserData(userData);
+        setUserData({
+          ...userData,
+          email: userData.email || ''
+        });
       }
       console.log('사용자 정보 저장 완료');
     } catch (error) {

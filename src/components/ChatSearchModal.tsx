@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaTimes, FaSearch, FaComment } from 'react-icons/fa';
+import { FaTimes, FaComment } from 'react-icons/fa';
 import './ChatSearchModal.css';
 
 interface ChatSession {
@@ -78,16 +78,7 @@ const ChatSearchModal: React.FC<ChatSearchModalProps> = ({
 
   const groupedSessions = groupSessionsByDate(filteredSessions);
 
-  const formatDate = (date: Date) => {
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 0) return '오늘';
-    if (diffDays === 1) return '어제';
-    if (diffDays <= 7) return '지난 7일';
-    return date.toLocaleDateString('ko-KR');
-  };
+
 
   if (!isOpen) return null;
 

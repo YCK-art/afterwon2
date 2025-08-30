@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { FaUser, FaPlus, FaSearch, FaFile, FaChartBar, FaMagic, FaArrowUp, FaCaretUp, FaCheck, FaEllipsisV, FaTrash, FaMicrophone, FaGlobe, FaCog, FaBrain, FaMemory, FaFilePdf, FaFileCsv, FaFileExcel, FaFileWord } from 'react-icons/fa';
+import { FaPlus, FaSearch, FaFile, FaMagic, FaArrowUp, FaCaretUp, FaCheck, FaEllipsisV, FaTrash, FaGlobe, FaCog, FaBrain, FaMemory, FaFilePdf, FaFileCsv, FaFileExcel, FaFileWord } from 'react-icons/fa';
 import { FiStar, FiEdit3 } from 'react-icons/fi';
 import { FiDownload, FiMaximize2 } from 'react-icons/fi';
 import { FiSidebar, FiSettings, FiLogOut, FiRefreshCw, FiCopy, FiType, FiMousePointer, FiChevronDown } from 'react-icons/fi';
@@ -106,40 +106,11 @@ const TypingMessage: React.FC<{ content: string; onComplete: () => void; onTypin
 };
 
 // AI 메시지 렌더러 컴포넌트
-const AIMessageRenderer: React.FC<{ content: string; files?: Array<{ name: string; size: number; type: string; content?: string; sheetNames?: string[] }> }> = ({ content, files }) => {
+const AIMessageRenderer: React.FC<{ content: string; files?: Array<{ name: string; size: number; type: string; content?: string; sheetNames?: string[] }> }> = ({ content }) => {
   const [tableData, setTableData] = useState<TableData | null>(null);
   const [processedContent, setProcessedContent] = useState<string>('');
 
-  // 채팅창에서 시트 선택 처리
-  const handleSheetSelectionFromChat = async (file: any, sheetName: string) => {
-    try {
-      console.log('시트 선택 시 전달된 file 객체:', file);
-      console.log('file 객체 타입:', typeof file);
-      console.log('file 객체 키들:', Object.keys(file));
-      
-      // file 객체가 실제 File 객체가 아닌 경우를 처리
-      if (!file.arrayBuffer) {
-        console.log('file.arrayBuffer가 없습니다. 파일 정보만 표시합니다.');
-        alert(`"${sheetName}" 시트가 선택되었습니다. 이제 해당 시트에 대해 분석을 요청해주세요.`);
-        return;
-      }
-      
-      // 선택된 시트의 내용을 읽어서 AI 분석 요청
-      const content = await extractExcelSheetAsCsv(file, sheetName);
-      
-      // 새로운 메시지로 시트 선택 요청 전송
-      const sheetSelectionMessage = `파일 "${file.name}"의 "${sheetName}" 시트를 분석해주세요.`;
-      
-      console.log(`시트 "${sheetName}" 선택됨:`, file.name);
-      console.log('선택된 시트 내용:', content.substring(0, 200) + '...');
-      
-      // 사용자에게 안내
-      alert(`"${sheetName}" 시트가 선택되었습니다. 이제 해당 시트에 대해 분석을 요청해주세요.`);
-    } catch (error) {
-      console.error('시트 처리 오류:', error);
-      alert(`시트 "${sheetName}" 처리 중 오류가 발생했습니다: ${(error as Error).message}`);
-    }
-  };
+
 
   useEffect(() => {
     // 테이블 데이터 추출
@@ -228,7 +199,7 @@ const AIMessageRenderer: React.FC<{ content: string; files?: Array<{ name: strin
             strong: ({node, ...props}) => <strong style={{fontWeight: 'bold'}} {...props} />,
             em: ({node, ...props}) => <em style={{fontStyle: 'italic'}} {...props} />,
             code: ({node, ...props}) => <code style={{backgroundColor: '#f4f4f4', padding: '0.2em 0.4em', borderRadius: '3px', fontFamily: 'SpaceMono-Regular, monospace'}} {...props} />,
-            pre: ({node, ...props}) => {
+            pre: ({node}) => {
               const CodeBlockWithCopy = () => {
                 const [isCopied, setIsCopied] = useState(false);
                 const codeContent = (node as any)?.children?.[0]?.children?.[0]?.value || '';
@@ -604,7 +575,7 @@ const SignatureLoading: React.FC<{ language?: string }> = ({ language = 'ko' }) 
 };
 
 // 차트 렌더링 컴포넌트
-const ChartRenderer: React.FC<{ content: string; currentSession: ChatSession | null; files?: Array<{ name: string; size: number; type: string; content?: string; sheetNames?: string[] }> }> = ({ content, currentSession, files }) => {
+const ChartRenderer: React.FC<{ content: string; currentSession: ChatSession | null; files?: Array<{ name: string; size: number; type: string; content?: string; sheetNames?: string[] }> }> = ({ content, files }) => {
   const [chartData, setChartData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -626,7 +597,7 @@ const ChartRenderer: React.FC<{ content: string; currentSession: ChatSession | n
       const content = await extractExcelSheetAsCsv(file, sheetName);
       
       // 새로운 메시지로 시트 선택 요청 전송
-      const sheetSelectionMessage = `파일 "${file.name}"의 "${sheetName}" 시트를 분석해주세요.`;
+
       
       console.log(`시트 "${sheetName}" 선택됨:`, file.name);
       console.log('선택된 시트 내용:', content.substring(0, 200) + '...');
@@ -1033,32 +1004,7 @@ const Dashboard: React.FC = () => {
     e.target.value = '';
   };
 
-  const handleRemoveFile = (messageId: string, fileIndex: number) => {
-    if (currentSession) {
-      const updatedMessages = currentSession.messages.map(message => {
-        if (message.id === messageId && message.files) {
-          const updatedFiles = message.files.filter((_, index) => index !== fileIndex);
-          return {
-            ...message,
-            files: updatedFiles.length > 0 ? updatedFiles : undefined
-          };
-        }
-        return message;
-      });
-      
-      const updatedSession = {
-        ...currentSession,
-        messages: updatedMessages
-      };
-      
-      setCurrentSession(updatedSession);
-      
-      // Firebase에 업데이트된 세션 저장
-      if (currentUser) {
-        updateChatSession(updatedSession.id, updatedSession);
-      }
-    }
-  };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -118,7 +118,7 @@ class ImageCache {
    * 모든 캐시 제거
    */
   clearCache(): void {
-    for (const [key, value] of this.cache.entries()) {
+    for (const [, value] of this.cache.entries()) {
       URL.revokeObjectURL(URL.createObjectURL(value.blob));
     }
     this.cache.clear();

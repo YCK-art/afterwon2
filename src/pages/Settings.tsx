@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FiUpload, FiTrash2 } from 'react-icons/fi';
+import { FiUpload } from 'react-icons/fi';
 import { uploadProfileImage, deleteProfileImage } from '../services/storageService';
 import { getCachedProfileImageUrl, removeProfileImageFromCache } from '../utils/imageCache';
 import './Settings.css';
@@ -14,7 +14,7 @@ interface SettingsProps {
   onProfileImageUpdate: (imageURL: string | null) => void;
 }
 
-const Settings: React.FC<SettingsProps> = ({ onBack, profileInitials, profileBackgroundColor, displayName, userId, initialProfileImageURL, onProfileImageUpdate }) => {
+const Settings: React.FC<SettingsProps> = ({ profileInitials, profileBackgroundColor, displayName, userId, initialProfileImageURL, onProfileImageUpdate }) => {
   const [activeTab, setActiveTab] = useState<'settings' | 'members' | 'billing'>('settings');
   const [workspaceName, setWorkspaceName] = useState(displayName);
   const [defaultGenerationName, setDefaultGenerationName] = useState('e.g. "$Prompt image - $Date"');

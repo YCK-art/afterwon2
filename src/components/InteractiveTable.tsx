@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import {
   useReactTable,
@@ -56,9 +56,8 @@ const InteractiveTable: React.FC<InteractiveTableProps> = ({ data, columns, titl
       return rowData;
     });
 
-    const headers = columns.map(col => col.header).filter(Boolean);
     const csvContent = [
-      headers.join(','),
+      columns.map(col => col.header).filter(Boolean).join(','),
       ...allData.map(row => 
         Object.values(row).map(value => 
           typeof value === 'string' && value.includes(',') ? `"${value}"` : value
@@ -91,8 +90,6 @@ const InteractiveTable: React.FC<InteractiveTableProps> = ({ data, columns, titl
       return rowData;
     });
 
-    const headers = columns.map(col => col.header).filter(Boolean);
-    
     // 헤더와 데이터를 포함한 워크시트 생성
     const ws = XLSX.utils.json_to_sheet(allData, { header: Object.keys(allData[0] || {}) });
     

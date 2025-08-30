@@ -9,7 +9,7 @@ import './App.css';
 
 function AppContent() {
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const { currentUser, signInWithGoogle, logout } = useAuth();
+  const { currentUser, signInWithGoogle } = useAuth();
 
   const onGetStartedClick = () => {
     setShowLoginModal(true);
@@ -31,13 +31,7 @@ function AppContent() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error('로그아웃 실패:', error);
-    }
-  };
+
 
   return (
     <Router>

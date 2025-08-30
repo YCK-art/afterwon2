@@ -138,7 +138,7 @@ export const updateProfileImage = async (uid: string, profileImageURL: string): 
  */
 export const removeProfileImage = async (uid: string): Promise<void> => {
   try {
-    await updateUserData(uid, { profileImageURL: null });
+    await updateUserData(uid, { profileImageURL: undefined });
     console.log('프로필 이미지 제거 완료:', uid);
   } catch (error) {
     console.error('프로필 이미지 제거 오류:', error);
